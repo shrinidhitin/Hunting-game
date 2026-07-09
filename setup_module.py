@@ -1,12 +1,9 @@
 import numpy as np
 import tkinter as tk
 import random
-from tkinter import messagebox
 
 width = 10
 height = 10
-
-board = np.zeros((height, width), dtype=int)
 
 def place_tiles(board, tile, count, width, height):
     placed = 0
@@ -18,13 +15,7 @@ def place_tiles(board, tile, count, width, height):
             placed += 1
 
 def gen_board(width, height):
-    emoji = {
-    0: "⬜",
-    1: "👹",
-    2: "💰",
-    3: "🍖",
-    4: "🏹"
-}
+    board = np.zeros((height, width), dtype=int)
     number_of_monsters = random.randint(10, 15)
     number_of_gold = 10
     number_of_meat = 10
@@ -33,10 +24,19 @@ def gen_board(width, height):
     place_tiles(board, 2, number_of_gold, width, height)
     place_tiles(board, 3, number_of_meat, width, height)
     place_tiles(board, 4, number_of_arrows, width, height)
-
+    return board
+    
+emoji = {
+    0: "⬜",
+    1: "👹",
+    2: "💰",
+    3: "🍖",
+    4: "🏹"
+}
+ 
+def get_emoji_board(board):
     emoji_board = np.vectorize(emoji.get)(board)
     return emoji_board
 
-
-    
+   
 

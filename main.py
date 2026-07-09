@@ -9,6 +9,7 @@ root = tk.Tk()
 root.title("Hunting for your village")
 
 board = sm.gen_board(width, height)
+emoji_board = sm.get_emoji_board(board)
 revealed = np.zeros((height, width), dtype=bool)
 result_label = tk.Label(root, text="")
 result_label.grid(row=13, column=0, columnspan=5, pady=10)
@@ -16,9 +17,9 @@ result_label.grid(row=13, column=0, columnspan=5, pady=10)
 def reveal_tile(x, y):
     if not revealed[x][y]:
         revealed[x][y] = False
-        buttons[x][y].config(text=board[x][y])
+        buttons[x][y].config(text=emoji_board[x][y])
     if revealed[x][y] == False:
-        tile = board[x][y]
+        tile = emoji_board[x][y]
         if tile == "🏹":
             inventory["arrows"] += 1
             revealed[x][y] = True
@@ -43,7 +44,10 @@ def reveal_tile(x, y):
     update_inventory_label()
 
 def clear():
+    global board, emoji_board, revealed
     result_label.config(text="")
+    board = sm.gen_board(width, height)
+    emoji_board = sm.get_emoji_board(board)
     for row in range(height):
         for col in range(width):
             buttons[row][col].config(text="")
@@ -51,7 +55,6 @@ def clear():
     inventory["arrows"] = 0
     inventory["meat"] = 0
     inventory["gold"] = 0
-
     update_inventory_label()
 
 
