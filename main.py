@@ -20,19 +20,26 @@ def reveal_tile(x, y):
         buttons[x][y].config(text=emoji_board[x][y])
     if revealed[x][y] == False:
         tile = emoji_board[x][y]
+        if tile == "⬜":
+            result_label.config(text="")
+            revealed[x][y] = True
         if tile == "🏹":
+            result_label.config(text="")
             inventory["arrows"] += 1
             revealed[x][y] = True
         if tile == "🍖":
+            result_label.config(text="")
             inventory["meat"] += 1
             revealed[x][y] = True
         if tile == "💰":
+            result_label.config(text="")
             inventory["gold"] += 1
             revealed[x][y] = True
         if tile == "👹":
             if inventory["arrows"] > 0:
                 inventory["arrows"] -= 1
                 result_label.config(text="Monster Defeated", fg="blue")
+                revealed[x][y] = True
             else:
                 result_label.config(text="Game Over", fg="red")
                 for y in range(height):
@@ -40,8 +47,12 @@ def reveal_tile(x, y):
                         revealed[x][y] = True
         if inventory["meat"] >= 10 and inventory["gold"] >= 10:
             result_label.config(text="You Win! You can now feed the villagers.", fg="green")
+            for y in range(height):
+                    for x in range(width):
+                        revealed[x][y] = True
     
     update_inventory_label()
+
 
 def clear():
     global board, emoji_board, revealed
@@ -82,5 +93,8 @@ for row in range(height):
 
 clear_button = tk.Button(root, text="Clear Board", font=("Arial", 14), command=clear)
 clear_button.grid(row=12, column=0, columnspan=width, pady=10)
+
+print(board)
+print(emoji_board)
 
 root.mainloop()
