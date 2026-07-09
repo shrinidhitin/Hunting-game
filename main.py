@@ -94,7 +94,4 @@ for row in range(height):
 clear_button = tk.Button(root, text="Clear Board", font=("Arial", 14), command=clear)
 clear_button.grid(row=12, column=0, columnspan=width, pady=10)
 
-print(board)
-print(emoji_board)
-
 root.mainloop()
