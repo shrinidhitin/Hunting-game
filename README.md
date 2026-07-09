@@ -19,6 +19,7 @@ How to play
   - 💰 Gold
   - 🍖 Meat
   - 🏹 Arrows
+- White tiles indicate safety in neighbouring tiles, while yellow tiles indicate potential danger
 - If you encounter a 👹 Monster:
   - You automatically use one arrow to defeat it.
   - If you have no arrows remaining, the game ends.
