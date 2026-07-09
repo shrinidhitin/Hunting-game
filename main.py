@@ -20,7 +20,7 @@ def reveal_tile(x, y):
         buttons[x][y].config(text=emoji_board[x][y])
     if revealed[x][y] == False:
         tile = emoji_board[x][y]
-        if tile == "⬜":
+        if tile == "⬜" or tile == "🟨":
             result_label.config(text="")
             revealed[x][y] = True
         if tile == "🏹":
